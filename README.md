@@ -11,7 +11,7 @@ Specify the api endpoint and optionally the encryption and auth token. Note: You
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
       <appSettings>
-        <add key="DeliveryTrust:ApiBaseUrl" value="http://localhost:20481/api/v1/"/>
+        <add key="DeliveryTrust:ApiBaseUrl" value="https://api.identillect.com/api/v1/"/>
         <add key="DeliveryTrust:EncryptionKey"/>
         <add key="DeliveryTrust:AuthToken"/>
       </appSettings>
