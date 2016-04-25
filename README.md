@@ -5,6 +5,19 @@
 If you use [NuGet](http://www.nuget.org/), simply run the following:
 `PM> Install-Package deliverytrust-api-client`
 
+## Configuration
+Specify the api endpoint and optionally the encryption and auth token. Note: You can choose to store your Encryption key and Auth token in your app/web.config to avoid needing to retrieve them each time a new DeliveryTrustClient is instantiated
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+      <appSettings>
+        <add key="DeliveryTrust:ApiBaseUrl" value="http://localhost:20481/api/v1/"/>
+        <add key="DeliveryTrust:EncryptionKey"/>
+        <add key="DeliveryTrust:AuthToken"/>
+      </appSettings>
+    </configuration>
+ 
+
 ## Client Documentation
 The Delivery Trust API endpoints require Username/Password authentication. Please sign up at https://identillect.com/product
 ### Example usage
@@ -41,11 +54,12 @@ In order to skip subsequent login steps (keep your user logged in) you must stor
     client.AuthTokenChanged += (sender, eventArgs) =>
     {
         //persist auth token in a shared location
-        SomeMethodToSaveIt(eventArgs.AuthToken);
+        ConfigurationManager.AppSettings["DeliveryTrust:AuthToken"] = eventArgs.AuthToken;
     };
     
 Next time you create an instance of the DeliveryTrustClient you can provide the `AuthToken` that you persisted and skip the `client.Login(...);` step.
 
 When specifying the AuthToken, passing null for the first two arguments will prompt the client to retrieve them from your app or web.config
 
-    var client = new DeliveryTrustClient(null, null, mySavedAuthToken);
+    var authToken = ConfigurationManager.AppSettings["DeliveryTrust:AuthToken"];
+    var client = new DeliveryTrustClient(null, null, authToken);
