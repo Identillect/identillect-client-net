@@ -4,19 +4,21 @@ Requires at least .NET Framework 4.0
 ## Installation
 
 If you use [NuGet](http://www.nuget.org/), simply run the following:
-`PM> Install-Package deliverytrust-api-client`
+```sh
+PM> Install-Package deliverytrust-api-client
+```
 
 ## Configuration
 Specify the api endpoint and optionally the encryption and auth token. Note: You can choose to store your Encryption key and Auth token in your app/web.config to avoid needing to retrieve them each time a new DeliveryTrustClient is instantiated
 ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <configuration>
-      <appSettings>
-        <add key="DeliveryTrust:ApiBaseUrl" value="https://api.identillect.com/api/v1/"/>
-        <add key="DeliveryTrust:EncryptionKey"/>
-        <add key="DeliveryTrust:AuthToken"/>
-      </appSettings>
-    </configuration>
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <appSettings>
+    <add key="DeliveryTrust:ApiBaseUrl" value="https://api.identillect.com/api/v1/"/>
+    <add key="DeliveryTrust:EncryptionKey"/>
+    <add key="DeliveryTrust:AuthToken"/>
+  </appSettings>
+</configuration>
 ```
 
 ## Client Documentation
@@ -24,8 +26,9 @@ The Delivery Trust API endpoints require Username/Password authentication. Pleas
 ### Example usage
 
 Begin by creating an instance of the client:
-
+```c#
     var client = new DeliveryTrustClient();
+```
     
 Provision the `client` with authentication credentials:
 
@@ -36,7 +39,7 @@ Provision the `client` with an encryption key:
     client.GetEncryptionKey();
     
  Finally send a secure email:
- 
+```c# 
     client.SendSecureEmail(new DeliveryTrustEmail
     {
         Recipients = new List<DeliveryTrustRecipient>
@@ -46,7 +49,7 @@ Provision the `client` with an encryption key:
         Subject = "Loan Documents",
         Body = "Your loan documents have been processed"
     });
-    
+```    
 ### Additional Notes Regarding Authentication
 Depending on the use case of your application additional authentication configuration may be required.
 
