@@ -8,7 +8,7 @@ If you use [NuGet](http://www.nuget.org/), simply run the following:
 
 ## Configuration
 Specify the api endpoint and optionally the encryption and auth token. Note: You can choose to store your Encryption key and Auth token in your app/web.config to avoid needing to retrieve them each time a new DeliveryTrustClient is instantiated
-
+```xml
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
       <appSettings>
@@ -17,7 +17,7 @@ Specify the api endpoint and optionally the encryption and auth token. Note: You
         <add key="DeliveryTrust:AuthToken"/>
       </appSettings>
     </configuration>
- 
+```
 
 ## Client Documentation
 The Delivery Trust API endpoints require Username/Password authentication. Please sign up at https://identillect.com/product
