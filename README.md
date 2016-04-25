@@ -33,3 +33,19 @@ Provision the `client` with an encryption key:
         Body = "Your loan documents have been processed"
     });
     
+### Additional Notes Regarding Authentication
+Depending on the use case of your application additional authentication configuration may be required.
+
+In order to skip subsequent login steps (keep your user logged in) you must store and provide the refresh token provided by the `client` whenever you create a new instance of the `client` (such as on each startup of the application).
+
+    client.AuthTokenChanged += (sender, eventArgs) =>
+    {
+        //persist auth token in a shared location
+        SomeMethodToSaveIt(eventArgs.AuthToken);
+    };
+    
+Next time you create an instance of the DeliveryTrustClient you can provide the `AuthToken` that you persisted and skip the `client.Login(...);` step.
+
+When specifying the AuthToken, passing null for the first two arguments will prompt the client to retrieve them from your app or web.config
+
+    var client = new DeliveryTrustClient(null, null, mySavedAuthToken);
