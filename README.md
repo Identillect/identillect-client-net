@@ -1,4 +1,5 @@
 # Delivery Trust .NET Client
+Requires at least .NET Framework 4.0
 
 ## Installation
 
