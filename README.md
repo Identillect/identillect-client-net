@@ -39,11 +39,20 @@ Provision the `client` with an encryption key:
 ```csharp
 client.GetEncryptionKey();
 ```
-    
+
+Create an email draft and retrieve an ID:
+```csharp
+var response = client.CreateDraftAsync(new CancellationToken()).Result;
+Guid draftId;
+Guid.TryParse(response.Data, out draftId);
+```
+
  Finally send a secure email:
 ```csharp 
 client.SendSecureEmail(new DeliveryTrustEmail
 {
+    DraftId = draftId,
+    From = new MailAddress { Address = "sender@domain.com", DisplayName = "Senders Name" },
     Recipients = new List<DeliveryTrustRecipient>
     {
         new DeliveryTrustRecipient{Address = "nick.l@identillect.com"}
