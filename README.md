@@ -24,6 +24,7 @@ Specify the api endpoint and optionally the encryption and auth token. Note: You
 ## Client Documentation
 The Delivery Trust API endpoints require Username/Password authentication. Please sign up at https://identillect.com/product
 ### Example usage
+**Note:** The following example describes very basic usage without the use of error handling.
 
 Begin by creating an instance of the client:
 ```csharp
