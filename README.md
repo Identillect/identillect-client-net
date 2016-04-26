@@ -90,6 +90,8 @@ Next time you create an instance of the DeliveryTrustClient you can provide the 
 When specifying the AuthToken, passing null for the first two arguments will prompt the client to retrieve them from your app or web.config
 ```csharp
 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-var authToken = config.AppSettings.Settings["DeliveryTrust:AuthToken"].Value;
-var client = new DeliveryTrustClient(null, null, authToken);
+
+var client = config.AppSettings.Settings["DeliveryTrust:AuthToken"] == null
+    ? new DeliveryTrustClient()
+    : new DeliveryTrustClient(null, null, config.AppSettings.Settings["DeliveryTrust:AuthToken"].Value);
 ```
