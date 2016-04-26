@@ -56,12 +56,19 @@ client.SendSecureEmail(new DeliveryTrustEmail
     From = new MailAddress { Address = "sender@domain.com", DisplayName = "Senders Name" },
     Recipients = new List<DeliveryTrustRecipient>
     {
-        new DeliveryTrustRecipient{Address = "nick.l@identillect.com"}
+        new DeliveryTrustRecipient 
+        {
+          Address = "nick.l@identillect.com"
+          Type = RecipientType.To,
+          SecurityPolicy = new SecurityPolicy()
+        }
     },
     Subject = "Loan Documents",
     Body = "Your loan documents have been processed"
 });
-```    
+```
+
+Each method returns a response object describing if it was successful or contains any errors.
 ### Additional Notes Regarding Authentication
 Depending on the use case of your application additional authentication configuration may be required.
 
