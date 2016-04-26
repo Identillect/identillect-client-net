@@ -5,7 +5,7 @@ Requires at least .NET Framework 4.0
 
 If you use [NuGet](http://www.nuget.org/), simply run the following:
 ```sh
-PM> Install-Package deliverytrust-api-client
+PM> Install-Package DeliveryTrustSdk
 ```
 
 ## Configuration
