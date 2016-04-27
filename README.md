@@ -77,7 +77,11 @@ In order to skip subsequent login steps (keep your user logged in) you must stor
 client.AuthTokenChanged += (sender, eventArgs) =>
 {
     //persist auth token in a shared location
-    ConfigurationManager.AppSettings["DeliveryTrust:AuthToken"] = eventArgs.AuthToken;
+	var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+    config.AppSettings.Settings["DeliveryTrust:AuthToken"].Value = eventArgs.AuthToken;
+    config.Save(ConfigurationSaveMode.Modified);
+    ConfigurationManager.RefreshSection("appSettings");
 };
 ```
     
@@ -85,6 +89,9 @@ Next time you create an instance of the DeliveryTrustClient you can provide the 
 
 When specifying the AuthToken, passing null for the first two arguments will prompt the client to retrieve them from your app or web.config
 ```csharp
-var authToken = ConfigurationManager.AppSettings["DeliveryTrust:AuthToken"];
-var client = new DeliveryTrustClient(null, null, authToken);
+var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+var client = config.AppSettings.Settings["DeliveryTrust:AuthToken"] == null
+    ? new DeliveryTrustClient()
+    : new DeliveryTrustClient(null, null, config.AppSettings.Settings["DeliveryTrust:AuthToken"].Value);
 ```
